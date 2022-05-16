@@ -8,7 +8,7 @@ if (typeof Storage !== 'undefined') {
             });
     }
 }
-function handleClick(language) {
+function selectTab(language) {
     if (typeof Storage !== 'undefined') {
         localStorage.setItem('active_language', language);
         document.querySelectorAll('.tab-' + language)

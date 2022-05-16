@@ -1,8 +1,6 @@
 <!-- Scratchpad gets populated through call to .Inner -->  
 {{- .Inner -}}
 
-
-
 <ul class="nav nav-tabs" id="tabs-{{- $.Ordinal -}}" role="tablist">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
     <li class="nav-item">
@@ -13,7 +11,7 @@
       {{- $tabname := replaceRE "(\\s)" "-" $element.header -}}
       {{- $tabname := replaceRE "(\\+)" "-" $tabname -}}
       <a class="nav-link{{ if eq $index "0" }} active{{ end }} tab-{{ $tabname }}"
-        id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab" onclick="selectTab({{ $tabname }});"
+        id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab" 
         aria-controls="{{ $entryid }}" aria-selected="{{- cond (eq $index "0") "true" "false" -}}">
         {{ index . "header" }}
       </a>
@@ -25,31 +23,11 @@
 <div class="tab-content" id="tabs-{{- $.Ordinal -}}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
-<!-- Begin Lang specific stuff -->
-    {{- $lang := default $.Site.Language.Lang ($.Get "lang") -}}
-    {{with $.Get "langEqualsHeader"}}
-        {{ if $.Get "langEqualsHeader"}}
-          {{ $lang = $element.header }}
-        {{end}}
-    {{end}}
-    {{- $hloptions := default "" ($.Get "highlight") -}}
-    {{- with $element.language -}}
-      {{  $lang = $element.language }}
-    {{- end -}}
-    {{- with $element.highlight -}}
-      {{  $hloptions = $element.highlight }}
-    {{- end -}}
-<!--End Lang specific stuff -->
-
     {{- $tabid := printf "tabs-%v-%v-tab" $.Ordinal $index | anchorize -}}
     {{- $entryid := printf "tabs-%v-%v" $.Ordinal $index | anchorize -}}
     <div class="tab-pane fade{{ if eq $index "0" }} show active{{ end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
-      {{- highlight (index . "content") $lang $hloptions -}}
-			<!-- No need to highlig or SafeHTML anything?, double check
       {{- index . "content" | safeHTML -}}
-			I have this on Tekton -->
-
     </div>
   {{ end }}
 </div>

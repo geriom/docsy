@@ -31,3 +31,17 @@ If you have an existing site that uses Docsy as a Git submodule, and you would l
 ## Setup guides
 
 Follow the setup guide for your chosen approach. If you're new to Docsy and not sure which guide to follow, we recommend following the Use Docsy as a Hugo Module guide as a simple and easily maintained option.
+
+## Testing
+
+{{< tabpane >}}
+  {{< tab header "English" >}}
+    Welcome!
+  {{< /tab >}}
+  {{< tab header="German" >}}
+    Herzlich willkommen!
+  {{< /tab >}}
+  {{< tab header="Swahili" >}}
+    Karibu sana!
+  {{< /tab >}}
+{{< /tabpane >}}
